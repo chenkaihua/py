@@ -52,3 +52,9 @@ pythonBean.printState()
 print ""
 pythonBean.addWater()
 pythonBean.printState()
+
+classmate = ['polo', 'toyota','mbw']
+print classmate
+print classmate[1]
+classmate.append('nisson')
+print classmate[-1]
