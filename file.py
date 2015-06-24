@@ -4,7 +4,6 @@ import os
 import re
 
 class host():
-    
     def __init__(self, name, ip, comments):
         self.name = name 
         self.ip = ip
@@ -30,10 +29,11 @@ class host_array_class():
         self.result_file.write(str(date))
         for host in host_array:
             respone = os.system("ping -c 3 " + host.ip)
+
             if respone == 0:
                 pass
             else:
-                self.result_file.write(str(host.show_hosts())
+                self.result_file.write(str(host.show_hosts()))
                 self.result_file.write(" is unaccessible\n")
 
 if __name__=="__main__":
