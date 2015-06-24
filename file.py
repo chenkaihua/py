@@ -1,40 +1,57 @@
 #!/usr/bin/env python
 
 import os
-
-def get_ip_address (line):
-    pass
-def get_host_name(line):
-    pass
-
-f = open('/home/kaihua/www/scripts/kaihua_hosts', 'r')
-#print(f.read())
-for line in f.readline():
-    #print(line.strip())
-    #print(line.split(' ', 1)) 
-    pass
-f.close()
+import re
 
 class host():
     
-    def __init__(self, name, ip, os, comments):
+    def __init__(self, name, ip, comments):
         self.name = name 
         self.ip = ip
-        self.os = os
         self.comments = comments
     
     def ping_test(self):
         respone = os.system("ping -c 3 " + self.ip)
-        print(respone)
         if respone == 0:
             print("The server is alive")
         else:
-            print("Server is unaccessible")
+            print('self.name is unaccessible')
 
     def show_hosts (self):
-        print(self.name + '\t'+ self.ip + '\t' + "# " + self.os + '\t' + self.comments)
+        print(self.name + '\t'+ self.ip + '\t' + "# " + self.comments)
 
-#if __name__ ==' __main__':
-sgh28h7 = host('sgh28h7', '10.103.117.90', 'SunOS', "Will decomission soon")
-sgh28h7.ping_test()
-sgh28h7.show_hosts()
+class host_array_class():
+    def __init__(self, host_array, result_file):
+        self.host_array = host_array
+        self.result_file = result_file
+    
+    def host_update(self):
+        date = os.system("date")
+        self.result_file.write(str(date))
+        for host in host_array:
+            respone = os.system("ping -c 3 " + host.ip)
+            if respone == 0:
+                pass
+            else:
+                self.result_file.write(str(host.show_hosts())
+                self.result_file.write(" is unaccessible\n")
+
+if __name__=="__main__":
+    result_file = open('/tmp/kaihua_host_check_python', 'w')
+    f = open('/home/kaihua/www/scripts/kaihua_hosts', 'r')
+    host_array=[]
+
+    for line in f:
+        if (re.search('^#', line)):
+            continue
+        if (re.search('^$', line)):
+            continue
+
+        server=host(line.split()[1], line.split()[0], line.split('#')[1])
+        host_array.append(server)
+
+    kaihua_hosts=host_array_class(host_array, result_file)
+    kaihua_hosts.host_update()
+
+    result_file.close()
+    f.close()
