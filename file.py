@@ -38,15 +38,23 @@ class host_array_class():
 
 if __name__=="__main__":
     result_file = open('/tmp/kaihua_host_check_python', 'w')
-    f = open('/home/kaihua/www/scripts/kaihua_hosts', 'r')
+    f_h = open('/home/kaihua/www/scripts/kaihua_hosts', 'r')
+    f_v = open('/home/kaihua/www/scripts/kaihua_vm', 'r')
     host_array=[]
+    f=[]
+
+    for line in f_h:
+        f.append(line)
+ 
+    for line in f_v:
+        f.append(line)
 
     for line in f:
         if (re.search('^#', line)):
             continue
         if (re.search('^$', line)):
             continue
-
+        print line
         server=host(line.split()[1], line.split()[0], line.split('#')[1])
         host_array.append(server)
 
