@@ -33,7 +33,7 @@ class host_array_class():
             if respone == 0:
                 pass
             else:
-                self.result_file.write(str(host.show_hosts()))
+                self.result_file.write(str(host.name))
                 self.result_file.write(" is unaccessible\n")
 
 if __name__=="__main__":
@@ -62,4 +62,5 @@ if __name__=="__main__":
     kaihua_hosts.host_update()
 
     result_file.close()
-    f.close()
+    f_h.close()
+    f_v.close()
