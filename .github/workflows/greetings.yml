@@ -19,12 +19,13 @@ jobs:
       run: |
         echo "Hello, world!"
         sudo apt-get update
-        sudo apt-get install -y s-nail calibre ca-certificates
+        sudo apt-get install -y s-nail 
+        #sudo apt-get calibre ca-certificates
         curl -L -o economist.recipe https://raw.githubusercontent.com/kovidgoyal/calibre/master/recipes/economist.recipe
         ls -l economist.recipe
         #ebook-convert economist.recipe te`date '+%Y%m%d'`.epub --output-profile kindle
         echo "download te file!\n"
     
-        echo "hello world!" | s-nail -S from="$EMAIL_FROM <$SMTP_USER>" -S smtp="smtp://$SMTP_SERVER:$SMTP_PORT" -S smtp-auth=login -S smtp-auth-user=$SMTP_USER -S smtp-auth-password=$SMTP_PASS -S ssl-verify=ignore -S mta=smtp -s "te`date '+%Y%m%d'`" kaihua.chen@outlook.com
+        echo "hello world!" | s-nail -S from="$EMAIL_FROM <$SMTP_USER>" -S mta="smtp://$SMTP_USER:$SMTP_PASS@$SMTP_SERVER:$SMTP_PORT" -S smtp-auth=login -S ssl-verify=ignore -s "te`date '+%Y%m%d'`" kaihua.chen@outlook.com
         echo "\n email sent!"
         
