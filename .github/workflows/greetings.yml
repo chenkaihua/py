@@ -24,6 +24,17 @@ jobs:
         ls -l economist.recipe
         #ebook-convert economist.recipe te`date '+%Y%m%d'`.epub --output-profile kindle
         echo "\n download te file!"
+
+        # 关键修复：配置 s-nail 强制使用 SMTP，禁用本地 sendmail
+          cat > ~/.mailrc << EOF
+          set from="$EMAIL_FROM <$SMTP_USER>"
+          set smtp=smtp://$SMTP_SERVER:$SMTP_PORT
+          set smtp-auth=login
+          set smtp-auth-user=$SMTP_USER
+          set smtp-auth-password=$SMTP_PASS
+          set ssl-verify=ignore
+          set mta=smtp  # 强制使用 SMTP 而非本地 sendmail（核心修复项）
+          EOF
         echo "hello world!" | s-nail -s "te`date '+%Y%m%d'`" kaihua.chen@outlook.com
         echo "\n email sent!"
         
