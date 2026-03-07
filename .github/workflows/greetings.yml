@@ -17,11 +17,12 @@ jobs:
         EMAIL_TO: ${{ secrets.EMAIL_TO }}             # 收件人邮箱
       run: |
         sudo apt-get update
-        sudo apt-get install -y s-nail calibre ca-certificates
+        sudo apt-get install -y s-nail ca-certificates wget
+        sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
         # 下载并修改参数
         curl -L -o economist.recipe https://raw.githubusercontent.com/kovidgoyal/calibre/master/recipes/economist.recipe
         ls -l economist.recipe
-        sed -i 's/^[[:space:]]*browser_type = '\''webengine'\''/#&/' economist.recipe
+        #sed -i 's/^[[:space:]]*browser_type = '\''webengine'\''/#&/' economist.recipe
         grep browser_type economist.recipe   
         
         ebook-convert economist.recipe ~/te`date '+%Y%m%d'`.epub --output-profile kindle
