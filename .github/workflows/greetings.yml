@@ -9,11 +9,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
     - name: Run a one-line script
+      env:
+        # 从 GitHub Secrets 读取敏感信息（需先在仓库设置中配置）
+        SMTP_SERVER: ${{ secrets.SMTP_SERVER }}       # SMTP 服务器（如 smtp.qq.com）
+        SMTP_PORT: ${{ secrets.SMTP_PORT }}           # SMTP 端口（如 587）
+        SMTP_USER: ${{ secrets.SMTP_USER }}           # 发件人邮箱
+        SMTP_PASS: ${{ secrets.SMTP_PASS }}           # 邮箱授权码（非登录密码）
+        EMAIL_TO: ${{ secrets.EMAIL_TO }}             # 收件人邮箱
       run: |
         echo "Hello, world!"
         sudo apt-get update
-        sudo apt-get install -y s-nail calibre
+        sudo apt-get install -y s-nail calibre ca-certificates
         curl -L -o economist.recipe https://raw.githubusercontent.com/kovidgoyal/calibre/master/recipes/economist.recipe
         ls -l economist.recipe
-        ebook-convert economist.recipe te`date '+%Y%m%d'`.epub --output-profile kindle
-        echo "download te file!"
+        #ebook-convert economist.recipe te`date '+%Y%m%d'`.epub --output-profile kindle
+        echo "\n download te file!"
+        echo "hello world!" | s-nail -s "te`date '+%Y%m%d'`" kaihua.chen@outlook.com
+        echo "\n email sent!"
+        
