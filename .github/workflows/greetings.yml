@@ -18,6 +18,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y s-nail ca-certificates wget
+        sudo agt-get install -y libegl1 libopengl0
         sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
         # 下载并修改参数
         curl -L -o economist.recipe https://raw.githubusercontent.com/kovidgoyal/calibre/master/recipes/economist.recipe
