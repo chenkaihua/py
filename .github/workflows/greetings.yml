@@ -23,10 +23,10 @@ jobs:
         curl -L -o economist.recipe https://raw.githubusercontent.com/kovidgoyal/calibre/master/recipes/economist.recipe
         ls -l economist.recipe
         #ebook-convert economist.recipe te`date '+%Y%m%d'`.epub --output-profile kindle
-        echo "\n download te file!"
+        echo "download te file!\n"
 
         # 关键修复：配置 s-nail 强制使用 SMTP，禁用本地 sendmail
-          cat > ~/.mailrc << EOF
+        cat > ~/.mailrc << EOF
           set from="$EMAIL_FROM <$SMTP_USER>"
           set smtp=smtp://$SMTP_SERVER:$SMTP_PORT
           set smtp-auth=login
