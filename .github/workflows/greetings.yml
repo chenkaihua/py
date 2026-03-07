@@ -26,8 +26,8 @@ jobs:
         echo "download te file!\n"
 
         cat <<EOF > ~/.mailrc
-        set from="$EMAIL_FROM <$SMTP_USER>"
-        set smtp=smtps://$SMTP_SERVER:$SMTP_PORT
+        set from=$SMTP_USER
+        set smtp="smtps://smtp.qq.com:465"
         set smtp-auth=login
         set smtp-auth-user=$SMTP_USER
         set smtp-auth-password=$SMTP_PASS
