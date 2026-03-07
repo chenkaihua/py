@@ -26,11 +26,11 @@ jobs:
         echo "download te file!\n"
 
         cat <<EOF > ~/.mailrc
-          set from="$EMAIL_FROM <$SMTP_USER>"
-          set smtp=smtp://$SMTP_SERVER:$SMTP_PORT
-          set smtp-auth=login
-          set smtp-auth-user=$SMTP_USER
-          set smtp-auth-password=$SMTP_PASS
+        set from="$EMAIL_FROM <$SMTP_USER>"
+        set smtp=smtps://$SMTP_SERVER:$SMTP_PORT
+        set smtp-auth=login
+        set smtp-auth-user=$SMTP_USER
+        set smtp-auth-password=$SMTP_PASS
         EOF
 
         # 验证配置文件是否正确生成（可选，便于排查）
