@@ -10,7 +10,6 @@ jobs:
       uses: actions/checkout@v4
     - name: Run a one-line script
       env:
-        # 从 GitHub Secrets 读取敏感信息（需先在仓库设置中配置）
         SMTP_SERVER: ${{ secrets.SMTP_SERVER }}       # SMTP 服务器（如 smtp.qq.com）
         SMTP_PORT: ${{ secrets.SMTP_PORT }}           # SMTP 端口（如 587）
         SMTP_USER: ${{ secrets.SMTP_USER }}           # 发件人邮箱
@@ -19,10 +18,10 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y s-nail 
-        #sudo apt-get calibre ca-certificates
+        sudo apt-get calibre ca-certificates
         curl -L -o economist.recipe https://raw.githubusercontent.com/kovidgoyal/calibre/master/recipes/economist.recipe
         ls -l economist.recipe
-        #ebook-convert economist.recipe te`date '+%Y%m%d'`.epub --output-profile kindle
+        ebook-convert economist.recipe ~/te`date '+%Y%m%d'`.epub --output-profile kindle
         echo "download te file!\n"
 
         cat <<EOF > ~/.mailrc
@@ -37,6 +36,7 @@ jobs:
         echo "=== .mailrc 配置内容 ==="
         cat ~/.mailrc
         echo "=========================="
-        echo "hello world!" | s-nail -v -s "te`date '+%Y%m%d'`" kaihua.chen@outlook.com
+        
+        echo "hello world!" | s-nail -v -a te`date '+%Y%m%d'`.epub -s ~/"te`date '+%Y%m%d'`" $EMAIL_TO
         echo "\n email sent!"
         
