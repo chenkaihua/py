@@ -17,8 +17,7 @@ jobs:
         EMAIL_TO: ${{ secrets.EMAIL_TO }}             # 收件人邮箱
       run: |
         sudo apt-get update
-        sudo apt-get install -y s-nail 
-        sudo apt-get calibre ca-certificates
+        sudo apt-get install -y s-nail calibre ca-certificates
         curl -L -o economist.recipe https://raw.githubusercontent.com/kovidgoyal/calibre/master/recipes/economist.recipe
         ls -l economist.recipe
         ebook-convert economist.recipe ~/te`date '+%Y%m%d'`.epub --output-profile kindle
