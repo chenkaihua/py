@@ -26,6 +26,6 @@ jobs:
         #ebook-convert economist.recipe te`date '+%Y%m%d'`.epub --output-profile kindle
         echo "download te file!\n"
     
-        echo "hello world!" | s-nail -S from="$EMAIL_FROM <$SMTP_USER>" -S mta="smtp://$SMTP_USER:$SMTP_PASS@$SMTP_SERVER:$SMTP_PORT" -S smtp-auth=login -S ssl-verify=ignore -s "te`date '+%Y%m%d'`" kaihua.chen@outlook.com
+        echo "hello world!" | s-nail -S from="$EMAIL_FROM <$SMTP_USER>" -S mta="smtps://$SMTP_USER:$SMTP_PASS@$SMTP_SERVER:$SMTP_PORT" -S smtp-auth=login -S ssl-verify=ignore -s "te`date '+%Y%m%d'`" kaihua.chen@outlook.com
         echo "\n email sent!"
         
