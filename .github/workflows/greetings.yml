@@ -17,7 +17,6 @@ jobs:
         SMTP_PASS: ${{ secrets.SMTP_PASS }}           # 邮箱授权码（非登录密码）
         EMAIL_TO: ${{ secrets.EMAIL_TO }}             # 收件人邮箱
       run: |
-        echo "Hello, world!"
         sudo apt-get update
         sudo apt-get install -y s-nail 
         #sudo apt-get calibre ca-certificates
@@ -25,7 +24,18 @@ jobs:
         ls -l economist.recipe
         #ebook-convert economist.recipe te`date '+%Y%m%d'`.epub --output-profile kindle
         echo "download te file!\n"
-    
-        echo "hello world!" | s-nail -S from="$EMAIL_FROM <$SMTP_USER>" -S mta="smtps://$SMTP_USER:$SMTP_PASS@$SMTP_SERVER:$SMTP_PORT" -S smtp-auth=login -S ssl-verify=ignore -s "te`date '+%Y%m%d'`" kaihua.chen@outlook.com
+        # 核心：用 printf 写入 .mailrc 配置，无 EOF 语法问题
+        printf "set from=\"%s <%s>\"\n\
+          set smtp=smtp://%s:%s\n\
+          set smtp-auth=login\n\
+          set smtp-auth-user=%s\n\
+          set smtp-auth-password=%s\n\
+          "$EMAIL_FROM" "$SMTP_USER" "$SMTP_SERVER" "$SMTP_PORT" "$SMTP_USER" "$SMTP_PASS" > ~/.mailrc
+
+        # 验证配置文件是否正确生成（可选，便于排查）
+        echo "=== .mailrc 配置内容 ==="
+        cat ~/.mailrc
+        echo "=========================="
+        echo "hello world!" | s-nail -v -s "te`date '+%Y%m%d'`" kaihua.chen@outlook.com
         echo "\n email sent!"
         
