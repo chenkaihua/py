@@ -13,5 +13,7 @@ jobs:
         echo "Hello, world!"
         sudo apt-get update
         sudo apt-get install -y s-nail calibre
-        ebook-convert "https://github.com/kovidgoyal/calibre/blob/master/recipes/economist.recipe" te`date '+%Y%m%d'`.epub --output-profile kindle
+        curl -L -o economist.recipe https://raw.githubusercontent.com/kovidgoyal/calibre/master/recipes/economist.recipe
+        ls -l economist.recipe
+        ebook-convert economist.recipe te`date '+%Y%m%d'`.epub --output-profile kindle
         echo "download te file!"
