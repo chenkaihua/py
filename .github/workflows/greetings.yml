@@ -26,7 +26,7 @@ jobs:
         #sed -i 's/^[[:space:]]*browser_type = '\''webengine'\''/#&/' magazine.recipe
         grep browser_type magazine.recipe   
         
-        ebook-convert magazine.recipe ~/te`date '+%Y%m%d'`.epub --output-profile kindle
+        ebook-convert magazine.recipe ~/te`date '+%Y%m%d'`.epub --output-profile kindle -v
         echo "download te file!\n"
         
         cat <<EOF > ~/.mailrc
