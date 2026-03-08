@@ -18,16 +18,15 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y s-nail ca-certificates wget
-        sudo apt-get install -y libegl1 libopengl0 libxcb-cursor0 xdg-utils
+        sudo apt-get install -y libegl1 libopengl0 libxcb-cursor0 xdg-utils libnss3
         sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
         # 下载并修改参数
         curl -L -o magazine.recipe https://raw.githubusercontent.com/kovidgoyal/calibre/master/recipes/bbc.recipe
         ls -l magazine.recipe
         #sed -i 's/^[[:space:]]*browser_type = '\''webengine'\''/#&/' magazine.recipe
         grep browser_type magazine.recipe   
-        
-        ebook-convert magazine.recipe ~/te`date '+%Y%m%d'`.epub --output-profile kindle -v
         echo "download te file!\n"
+        ebook-convert magazine.recipe ~/te`date '+%Y%m%d'`.epub --output-profile kindle -v
         
         cat <<EOF > ~/.mailrc
         set from=$SMTP_USER
