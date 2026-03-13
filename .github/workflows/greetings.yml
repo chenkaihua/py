@@ -41,6 +41,6 @@ jobs:
         cat ~/.mailrc
         echo "=========================="
         
-        echo "hello world!" | s-nail -v -a te`date '+%Y%m%d'`.epub -s ~/"te`date '+%Y%m%d'`" kaihua.chen_mbp7Gq@kindle.com
+        echo " " | s-nail -v -a te`date '+%Y%m%d'`.epub -s ~/"te`date '+%Y%m%d'`" kaihua.chen_mbp7Gq@kindle.com
         echo "\n email sent!"
         
